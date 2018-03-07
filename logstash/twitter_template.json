@@ -1,0 +1,87 @@
+{
+  "index_patterns": ["twitter"],
+  "settings": {
+    "number_of_shards": 1
+  },
+  "mappings" : {
+    "doc" : {
+      "properties" : {
+        "created_at" : {
+          "type" : "date",
+          "format" : "EEE MMM dd HH:mm:ss Z YYYY"
+        },
+        "coordinates" : {
+          "properties" : {
+            "coordinates" : {
+              "type" : "geo_point"
+            },
+            "type" : {
+              "type" : "text"
+            }
+          }
+        },
+        "user" : {
+          "properties" : {
+            "screen_name" : {
+              "type" : "text",
+              "index" : false
+            },
+            "lang" : {
+              "type" : "text",
+              "index" : false
+            }
+          }
+        },
+        "entities": {
+          "properties": {
+            "hashtags": {
+              "properties": {
+                  "indices": {
+                    "type": "long"
+                  },
+                  "text": {
+                    "type": "text",
+                    "fields": {}
+                  }
+              }
+            },
+            "urls": {
+              "properties": {
+                "display_url": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "expanded_url": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                },
+                "indices": {
+                "type": "long"
+                },
+                "url": {
+                  "type": "text",
+                  "fields": {
+                    "keyword": {
+                      "type": "keyword",
+                      "ignore_above": 256
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
